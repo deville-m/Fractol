@@ -1,0 +1,7 @@
+a.out
+*.o
+*.d
+test*
+fractol
+libft.a
+.DS_Store
