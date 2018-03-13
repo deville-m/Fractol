@@ -6,7 +6,7 @@
 #    By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/26 14:57:14 by mdeville          #+#    #+#              #
-#    Updated: 2018/03/09 13:25:48 by mdeville         ###   ########.fr        #
+#    Updated: 2018/03/13 17:55:19 by mdeville         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ CC=clang
 CFLAGS=-Wall -Wextra -Werror -O3
 INCLUDES=-Iincludes/ -Ilibft/includes/
 LIBDIR=libft/
-LDFLAGS=-lmlx -framework OpenGL -framework AppKit
+LDFLAGS=-lpthread -lmlx -framework OpenGL -framework AppKit
 
 LIB=$(addprefix $(LIBDIR), libft.a)
 SRC=	srcs/ft_graphics/init.c \
@@ -27,6 +27,10 @@ SRC=	srcs/ft_graphics/init.c \
 		srcs/ft_graphics/put_line.c \
 		srcs/ft_graphics/init_hooks.c \
 		srcs/ft_graphics/exit_x.c \
+		srcs/print_x.c \
+		srcs/key_hook.c \
+		srcs/iterate.c \
+		srcs/mandelbrot.c \
 		srcs/main.c
 
 OBJ=$(SRC:.c=.o)
@@ -36,7 +40,7 @@ all: $(NAME)
 $(LIB):
 	$(MAKE) -j8 -C $(LIBDIR)
 
-%.o: %.c includes/ft_graphics.h
+%.o: %.c includes/fractol.h includes/ft_graphics.h
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 $(NAME): $(OBJ) $(LIB)

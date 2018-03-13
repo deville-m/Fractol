@@ -6,12 +6,22 @@
 /*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/02 20:52:55 by mdeville          #+#    #+#             */
-/*   Updated: 2018/03/12 14:20:51 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/03/13 14:45:47 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_GRAPHICS_H
 # define FT_GRAPHICS_H
+
+# define WHITE 0X00FFFFFF
+# define BLACK 0X00000000
+# define BLUE 0X000000FF
+# define GREEN 0X0000FF00
+# define RED 0X00FF0000
+# define MIDDLEGREY 0X007A7A7A
+# define CYAN 0X0000FFFF
+# define GOLD 0X00FFD700
+# define INDIGO 0X004B0082
 
 typedef struct			s_3dvector
 {
