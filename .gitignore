@@ -3,5 +3,5 @@ a.out
 *.d
 test*
 fractol
-libft.a
+*.a
 .DS_Store

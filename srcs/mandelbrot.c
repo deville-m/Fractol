@@ -6,7 +6,7 @@
 /*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 14:02:42 by mdeville          #+#    #+#             */
-/*   Updated: 2018/03/13 16:52:13 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/03/13 22:24:21 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,9 @@ static t_pixel	palette(int iteration, int maxit)
 {
 	t_pixel res;
 
-	if (iteration / maxit <= 0.01)
-		res.hex = BLUE;
-	else if (iteration / maxit <= 0.1)
-		res.hex = CYAN;
-	else if (iteration / maxit <= 0.2)
-		res.hex = GREEN;
-	else if (iteration / maxit <= 0.5)
-		res.hex = INDIGO;
-	else if (iteration / maxit <= 0.75)
-		res.hex = RED;
-	else
-		res.hex = GOLD;
+	res.color.r = iteration * 0XFF / maxit;
+	res.color.g = iteration * 0XFF / maxit;
+	res.color.b = iteration * 0XFF / maxit;
 	return (res);
 }
 

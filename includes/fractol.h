@@ -6,7 +6,7 @@
 /*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/09 13:20:09 by mdeville          #+#    #+#             */
-/*   Updated: 2018/03/13 17:54:55 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/03/14 01:11:05 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct	s_conf
 t_conf	*get_conf(void);
 void	iterate(t_mlx *mlx, t_conf *conf, void *(*f)(void *));
 void	*mandelbrot(void *);
+int		mouse_press(int keycode, int x, int y, void *param);
 int		key_hook(int keycode, void *param);
 int		print_x(void *param);
 
