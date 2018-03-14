@@ -6,7 +6,7 @@
 /*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 14:28:11 by mdeville          #+#    #+#             */
-/*   Updated: 2018/03/14 16:05:09 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/03/14 23:42:16 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ int		mouse_hook(int x, int y, void *param)
 	t_2dvector	pixel;
 
 	conf = get_conf();
-	if (conf->mode != 2)
+	if (conf->calc == m_escape || conf->calc == m_normalize)
 		return (0);
-	conf->maxit = 50;
+	conf->maxit = 30;
 	mlx = (t_mlx *)param;
 	pixel.x = (conf->max.x - conf->min.x) / mlx->img->width;
 	pixel.y = (conf->max.y - conf->min.y) / mlx->img->height;

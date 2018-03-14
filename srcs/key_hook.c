@@ -6,7 +6,7 @@
 /*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 17:20:07 by mdeville          #+#    #+#             */
-/*   Updated: 2018/03/14 15:34:40 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/03/14 23:11:09 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int		move_key(int keycode, t_conf *conf)
 	int		sign;
 	double	tmp;
 
-	sign = (keycode == DOWN_KEY || keycode == RIGHT_KEY) ? 1: -1;
+	sign = (keycode == DOWN_KEY || keycode == RIGHT_KEY) ? 1 : -1;
 	if (keycode == UP_KEY || keycode == DOWN_KEY)
 	{
 		tmp = (conf->max.y - conf->min.y) / 20;
@@ -62,6 +62,42 @@ int		move_key(int keycode, t_conf *conf)
 	return (1);
 }
 
+int		calc_key(int keycode, t_conf *conf)
+{
+	if (keycode == NK1_KEY)
+		conf->calc = m_escape;
+	else if (keycode == NK2_KEY)
+		conf->calc = m_normalize;
+	else if (keycode == NK3_KEY)
+		conf->calc = j_escape;
+	else
+		return (0);
+	return (1);
+}
+
+int		palette_key(int keycode, t_conf *conf)
+{
+	if (keycode == NK4_KEY)
+		conf->palette = monochrome;
+	else if (keycode == NK5_KEY)
+		conf->palette = smooth;
+	else if (keycode == NK6_KEY)
+		conf->palette = zebra;
+	else if (keycode == NKWC_KEY && conf->hue < 360)
+	{
+		++conf->hue;
+		conf->color = hsv_to_rgb(conf->hue, 1, 1);
+	}
+	else if (keycode == NKSL_KEY && conf->hue > 0)
+	{
+		--conf->hue;
+		conf->color = hsv_to_rgb(conf->hue, 1, 1);
+	}
+	else
+		return (0);
+	return (1);
+}
+
 int		key_hook(int keycode, void *param)
 {
 	t_conf	*conf;
@@ -69,7 +105,10 @@ int		key_hook(int keycode, void *param)
 	conf = get_conf();
 	if (keycode == ESC_KEY)
 		exit_x(param);
-	else if (move_key(keycode, conf) || zoom_key(keycode, conf))
-		conf->maxit = 20;
+	else if (move_key(keycode, conf)
+			|| zoom_key(keycode, conf)
+			|| calc_key(keycode, conf)
+			|| palette_key(keycode, conf))
+		conf->maxit = 50;
 	return (1);
 }

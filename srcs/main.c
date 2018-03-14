@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 13:33:55 by mdeville          #+#    #+#             */
-/*   Updated: 2018/03/14 14:42:44 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/03/14 23:31:34 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 t_conf		*get_conf(void)
 {
-	static t_conf conf = {{-2.5, 1.}, {1., -1.}, {-1., -1.}, 100, 1, 0};
+	static t_conf conf = {{-2.5, 1.}, {1., -1.}, {0, 0}, 10, 1, 0, {0}, 0, 0};
 
 	return (&conf);
 }
@@ -38,9 +38,15 @@ int			main(int argc, char **argv)
 	}
 	conf = get_conf();
 	if (ft_strequ("-m", argv[1]))
-		conf->mode = 1;
+	{
+		conf->calc = m_escape;
+		conf->palette = monochrome;
+	}
 	else
-		conf->mode = 2;
+	{
+		conf->calc = j_escape;
+		conf->palette = smooth;
+	}
 	if (!init(&mlx, WIDTH, HEIGHT, "Fractol") || !init_hooks(&mlx))
 		return (0);
 	mlx_loop_hook(mlx.ptr, print_x, &mlx);

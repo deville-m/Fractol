@@ -6,7 +6,7 @@
 /*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/12 14:05:29 by mdeville          #+#    #+#             */
-/*   Updated: 2018/03/14 14:26:27 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/03/14 19:49:09 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,34 @@
 #include "fractol.h"
 #include "ft_graphics.h"
 #include <stdio.h>
+
+static void				*calc(void *args)
+{
+	t_pargs		*pargs;
+	t_2dvector	pixel;
+	t_2dvector	tmp;
+	double		iteration;
+
+	pargs = (t_pargs *)args;
+	pixel.y = pargs->miny;
+	while (pixel.y < pargs->maxy)
+	{
+		pixel.x = 0;
+		while (pixel.x < pargs->img->width)
+		{
+			tmp.x = pixel.x * pargs->pixel.x + pargs->cmin.x;
+			tmp.y = pixel.y * pargs->pixel.y + pargs->cmin.y;
+			iteration = pargs->calc(&tmp, pargs->julia_c, pargs->maxit);
+			put_pixel(
+					pargs->img,
+					pixel,
+					pargs->palette(iteration, pargs->maxit, tmp));
+			++pixel.x;
+		}
+		++pixel.y;
+	}
+	return (NULL);
+}
 
 static inline t_pargs	init_arg(t_mlx *mlx, t_conf *conf)
 {
@@ -28,10 +56,12 @@ static inline t_pargs	init_arg(t_mlx *mlx, t_conf *conf)
 	arg.cmin.x = conf->min.x;
 	arg.cmin.y = conf->min.y;
 	arg.julia_c = conf->julia_c;
+	arg.calc = conf->calc;
+	arg.palette = conf->palette;
 	return (arg);
 }
 
-void					iterate(t_mlx *mlx, t_conf *conf, void *(*f)(void *))
+void					iterate(t_mlx *mlx, t_conf *conf)
 {
 	pthread_t	threads[conf->nbthread];
 	t_pargs		thargs[conf->nbthread];
@@ -50,7 +80,7 @@ void					iterate(t_mlx *mlx, t_conf *conf, void *(*f)(void *))
 		else
 			arg.maxy = mlx->img->height;
 		thargs[i] = arg;
-		if (pthread_create(&threads[i], NULL, f, &thargs[i]))
+		if (pthread_create(&threads[i], NULL, calc, &thargs[i]))
 			break ;
 		++i;
 	}

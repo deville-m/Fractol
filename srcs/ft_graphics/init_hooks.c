@@ -6,7 +6,7 @@
 /*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/03 20:46:42 by mdeville          #+#    #+#             */
-/*   Updated: 2018/03/14 14:34:52 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/03/14 23:05:31 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,3 @@ int		init_hooks(t_mlx *mlx)
 	}
 	return (1);
 }
-//		|| !mlx_hook(mlx->win, BUTTONRELEASE, 1L << 3, mouse_release, mlx)
