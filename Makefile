@@ -6,7 +6,7 @@
 #    By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/26 14:57:14 by mdeville          #+#    #+#              #
-#    Updated: 2018/03/13 17:55:19 by mdeville         ###   ########.fr        #
+#    Updated: 2018/03/14 14:43:01 by mdeville         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,8 +29,11 @@ SRC=	srcs/ft_graphics/init.c \
 		srcs/ft_graphics/exit_x.c \
 		srcs/print_x.c \
 		srcs/key_hook.c \
+		srcs/mouse_press.c \
+		srcs/mouse_hook.c \
 		srcs/iterate.c \
 		srcs/mandelbrot.c \
+		srcs/julia.c \
 		srcs/main.c
 
 OBJ=$(SRC:.c=.o)

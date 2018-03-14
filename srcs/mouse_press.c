@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 00:58:11 by mdeville          #+#    #+#             */
-/*   Updated: 2018/03/14 01:19:05 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/03/14 15:35:09 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int		mouse_press(int keycode, int x, int y, void *param)
 	t_2dvector	middle;
 
 	conf = get_conf();
-	conf->maxit = 100;
+	conf->maxit = 20;
 	mlx = (t_mlx *)param;
 	diff.x = conf->max.x - conf->min.x;
 	diff.y = conf->max.y - conf->min.y;

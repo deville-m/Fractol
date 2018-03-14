@@ -6,7 +6,7 @@
 /*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/12 14:05:29 by mdeville          #+#    #+#             */
-/*   Updated: 2018/03/13 16:42:36 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/03/14 14:26:27 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static inline t_pargs	init_arg(t_mlx *mlx, t_conf *conf)
 	arg.pixel.y = (conf->max.y - conf->min.y) / mlx->img->height;
 	arg.cmin.x = conf->min.x;
 	arg.cmin.y = conf->min.y;
+	arg.julia_c = conf->julia_c;
 	return (arg);
 }
 

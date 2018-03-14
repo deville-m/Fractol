@@ -6,7 +6,7 @@
 /*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/09 13:20:09 by mdeville          #+#    #+#             */
-/*   Updated: 2018/03/14 01:11:05 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/03/14 14:36:38 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef struct	s_pargs
 	t_image		*img;
 	t_2dvector	pixel;
 	t_2dvector	cmin;
+	t_2dvector	julia_c;
 	int			miny;
 	int			maxy;
 	int			maxit;
@@ -35,12 +36,15 @@ typedef struct	s_conf
 	t_2dvector	julia_c;
 	int			nbthread;
 	int			maxit;
+	int			mode;
 }				t_conf;
 
 t_conf	*get_conf(void);
 void	iterate(t_mlx *mlx, t_conf *conf, void *(*f)(void *));
 void	*mandelbrot(void *);
+void	*julia(void *);
 int		mouse_press(int keycode, int x, int y, void *param);
+int		mouse_hook(int x, int y, void *param);
 int		key_hook(int keycode, void *param);
 int		print_x(void *param);
 

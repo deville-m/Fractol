@@ -6,11 +6,10 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 13:33:55 by mdeville          #+#    #+#             */
-/*   Updated: 2018/03/14 01:31:49 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/03/14 14:42:44 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include <fcntl.h>
 #include <unistd.h>
 #include <mlx.h>
@@ -18,10 +17,11 @@
 #include "ft_graphics.h"
 #include "mlx_keycode.h"
 #include "ft_printf.h"
+#include "ft_string.h"
 
 t_conf		*get_conf(void)
 {
-	static t_conf conf = {{-2.5, 1.}, {1., -1.}, {-1., -1.}, 500, 1};
+	static t_conf conf = {{-2.5, 1.}, {1., -1.}, {-1., -1.}, 100, 1, 0};
 
 	return (&conf);
 }
@@ -29,9 +29,18 @@ t_conf		*get_conf(void)
 int			main(int argc, char **argv)
 {
 	t_mlx		mlx;
+	t_conf		*conf;
 
-	(void)argc;
-	(void)argv;
+	if (argc != 2 || !(ft_strequ("-m", argv[1]) || ft_strequ("-j", argv[1])))
+	{
+		ft_fprintf(2, "usage: fractol [-m | -j]");
+		return (0);
+	}
+	conf = get_conf();
+	if (ft_strequ("-m", argv[1]))
+		conf->mode = 1;
+	else
+		conf->mode = 2;
 	if (!init(&mlx, WIDTH, HEIGHT, "Fractol") || !init_hooks(&mlx))
 		return (0);
 	mlx_loop_hook(mlx.ptr, print_x, &mlx);
