@@ -6,14 +6,14 @@
 /*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/02 20:52:55 by mdeville          #+#    #+#             */
-/*   Updated: 2018/03/13 14:45:47 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/03/15 11:38:41 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_GRAPHICS_H
 # define FT_GRAPHICS_H
 
-# define WHITE 0X00FFFFFF
+# define DEF 0X00FFFFFF
 # define BLACK 0X00000000
 # define BLUE 0X000000FF
 # define GREEN 0X0000FF00

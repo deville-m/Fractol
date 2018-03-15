@@ -6,7 +6,7 @@
 /*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/09 13:20:09 by mdeville          #+#    #+#             */
-/*   Updated: 2018/03/14 23:35:20 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/03/15 14:16:13 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ typedef struct	s_pargs
 	int			miny;
 	int			maxy;
 	int			maxit;
-	double		(*calc)(t_2dvector *, t_2dvector, int maxit);
-	t_pixel		(*palette)(double, int, t_2dvector);
+	double		(*calc)(double, double, t_2dvector, int maxit);
+	t_pixel		(*palette)(double, int);
 }				t_pargs;
 
 typedef struct	s_conf
@@ -40,8 +40,8 @@ typedef struct	s_conf
 	int			maxit;
 	double		hue;
 	t_pixel		color;
-	double		(*calc)(t_2dvector *, t_2dvector, int maxit);
-	t_pixel		(*palette)(double, int, t_2dvector);
+	double		(*calc)(double, double, t_2dvector, int maxit);
+	t_pixel		(*palette)(double, int);
 }				t_conf;
 
 t_conf			*get_conf(void);
@@ -56,16 +56,18 @@ int				print_x(void *param);
 ** Calc functions
 */
 
-double			m_escape(t_2dvector *point, t_2dvector var, int maxit);
-double			m_normalize(t_2dvector *point, t_2dvector var, int maxit);
-double			j_escape(t_2dvector *point, t_2dvector c, int maxit);
+double			m_escape(double x0, double y0, t_2dvector var, int maxit);
+double			m_normalize(double x0, double y0, t_2dvector var, int maxit);
+double			tricorn(double x0, double y0, t_2dvector var, int maxit);
+double			burning_ship(double x0, double y0, t_2dvector var, int maxit);
+double			j_escape(double x0, double y0, t_2dvector c, int maxit);
 
 /*
 ** Palette functions
 */
 
-t_pixel			monochrome(double smooth, int maxit, t_2dvector point);
-t_pixel			smooth(double smooth, int maxit, t_2dvector point);
-t_pixel			zebra(double smooth, int maxit, t_2dvector point);
+t_pixel			monochrome(double smooth, int maxit);
+t_pixel			smooth(double smooth, int maxit);
+t_pixel			zebra(double smooth, int maxit);
 
 #endif

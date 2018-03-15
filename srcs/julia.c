@@ -6,7 +6,7 @@
 /*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 14:10:42 by mdeville          #+#    #+#             */
-/*   Updated: 2018/03/14 20:55:37 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/03/15 13:34:39 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "fractol.h"
 #include "ft_graphics.h"
 
-double	j_escape(t_2dvector *point, t_2dvector c, int maxit)
+double	j_escape(double x0, double y0, t_2dvector c, int maxit)
 {
 	int		i;
 	double	xtemp;
@@ -22,8 +22,8 @@ double	j_escape(t_2dvector *point, t_2dvector c, int maxit)
 	double	y;
 
 	i = 0;
-	x = point->x;
-	y = point->y;
+	x = x0;
+	y = y0;
 	while (x * x + y * y < 4 && i < maxit)
 	{
 		xtemp = x * x - y * y + c.x;
@@ -31,7 +31,5 @@ double	j_escape(t_2dvector *point, t_2dvector c, int maxit)
 		x = xtemp;
 		++i;
 	}
-	point->x = x;
-	point->y = y;
 	return (i);
 }

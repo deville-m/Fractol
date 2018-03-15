@@ -6,7 +6,7 @@
 /*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/12 14:05:29 by mdeville          #+#    #+#             */
-/*   Updated: 2018/03/14 19:49:09 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/03/15 13:32:23 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ static void				*calc(void *args)
 {
 	t_pargs		*pargs;
 	t_2dvector	pixel;
-	t_2dvector	tmp;
 	double		iteration;
 
 	pargs = (t_pargs *)args;
@@ -30,13 +29,14 @@ static void				*calc(void *args)
 		pixel.x = 0;
 		while (pixel.x < pargs->img->width)
 		{
-			tmp.x = pixel.x * pargs->pixel.x + pargs->cmin.x;
-			tmp.y = pixel.y * pargs->pixel.y + pargs->cmin.y;
-			iteration = pargs->calc(&tmp, pargs->julia_c, pargs->maxit);
+			iteration = pargs->calc(
+					pixel.x * pargs->pixel.x + pargs->cmin.x,
+					pixel.y * pargs->pixel.y + pargs->cmin.y,
+					pargs->julia_c, pargs->maxit);
 			put_pixel(
 					pargs->img,
 					pixel,
-					pargs->palette(iteration, pargs->maxit, tmp));
+					pargs->palette(iteration, pargs->maxit));
 			++pixel.x;
 		}
 		++pixel.y;

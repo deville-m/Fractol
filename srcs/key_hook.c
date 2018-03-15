@@ -6,7 +6,7 @@
 /*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 17:20:07 by mdeville          #+#    #+#             */
-/*   Updated: 2018/03/14 23:11:09 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/03/15 15:00:58 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,16 @@ int		move_key(int keycode, t_conf *conf)
 
 int		calc_key(int keycode, t_conf *conf)
 {
-	if (keycode == NK1_KEY)
+	if (keycode == Q_KEY)
 		conf->calc = m_escape;
-	else if (keycode == NK2_KEY)
+	else if (keycode == W_KEY)
 		conf->calc = m_normalize;
-	else if (keycode == NK3_KEY)
+	else if (keycode == A_KEY)
 		conf->calc = j_escape;
+	else if (keycode == E_KEY)
+		conf->calc = tricorn;
+	else if (keycode == R_KEY)
+		conf->calc = burning_ship;
 	else
 		return (0);
 	return (1);
@@ -77,20 +81,22 @@ int		calc_key(int keycode, t_conf *conf)
 
 int		palette_key(int keycode, t_conf *conf)
 {
-	if (keycode == NK4_KEY)
+	if (keycode == NK1_KEY)
 		conf->palette = monochrome;
-	else if (keycode == NK5_KEY)
+	else if (keycode == NK2_KEY)
 		conf->palette = smooth;
-	else if (keycode == NK6_KEY)
+	else if (keycode == NK3_KEY)
 		conf->palette = zebra;
-	else if (keycode == NKWC_KEY && conf->hue < 360)
+	else if (keycode == NK0_KEY)
+		conf->color.hex = 0X00FFFFFF;
+	else if (keycode == NKWC_KEY && conf->hue < 359)
 	{
-		++conf->hue;
+		conf->hue += 5;
 		conf->color = hsv_to_rgb(conf->hue, 1, 1);
 	}
 	else if (keycode == NKSL_KEY && conf->hue > 0)
 	{
-		--conf->hue;
+		conf->hue -= 5;
 		conf->color = hsv_to_rgb(conf->hue, 1, 1);
 	}
 	else
