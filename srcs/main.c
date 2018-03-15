@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 13:33:55 by mdeville          #+#    #+#             */
-/*   Updated: 2018/03/15 14:55:00 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/03/15 15:35:07 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,20 @@ int			main(int argc, char **argv)
 	t_mlx		mlx;
 	t_conf		*conf;
 
-	if (argc != 2 || !(ft_strequ("-m", argv[1]) || ft_strequ("-j", argv[1])))
+	if (argc != 2 || !(ft_strequ("Mandelbrot", argv[1])
+						|| ft_strequ("Julia", argv[1])
+						|| ft_strequ("Burning_ship", argv[1])))
 	{
-		ft_fprintf(2, "usage: fractol [-m | -j]");
+		ft_fprintf(2, "usage: fractol [Mandelbrot | Julia | Burning_ship]\n");
 		return (0);
 	}
 	conf = get_conf();
-	if (ft_strequ("-m", argv[1]))
+	if (ft_strequ("Mandelbrot", argv[1]))
 		conf->calc = m_escape;
-	else
+	else if (ft_strequ("Julia", argv[1]))
 		conf->calc = j_escape;
+	else
+		conf->calc = burning_ship;
 	conf->palette = monochrome;
 	conf->hue = 360;
 	if (!init(&mlx, WIDTH, HEIGHT, "Fractol") || !init_hooks(&mlx))

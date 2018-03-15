@@ -6,7 +6,7 @@
 /*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 17:20:07 by mdeville          #+#    #+#             */
-/*   Updated: 2018/03/15 15:00:58 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/03/15 15:24:24 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,12 +89,12 @@ int		palette_key(int keycode, t_conf *conf)
 		conf->palette = zebra;
 	else if (keycode == NK0_KEY)
 		conf->color.hex = 0X00FFFFFF;
-	else if (keycode == NKWC_KEY && conf->hue < 359)
+	else if (keycode == NKWC_KEY && conf->hue < 355)
 	{
 		conf->hue += 5;
 		conf->color = hsv_to_rgb(conf->hue, 1, 1);
 	}
-	else if (keycode == NKSL_KEY && conf->hue > 0)
+	else if (keycode == NKSL_KEY && conf->hue >= 5)
 	{
 		conf->hue -= 5;
 		conf->color = hsv_to_rgb(conf->hue, 1, 1);
